@@ -18,8 +18,22 @@ java_grpc_library(
 
 java_binary(
     name = "server",
-    srcs = glob(["src/**/*.java"]),
+    srcs = ["src/main/java/com/example/grpc/server/MyGrpcServer.java"],
     main_class = "com.example.grpc.server.MyGrpcServer",
+    deps = [
+        ":GreetingService_grpc",
+        "//examples/simple-grpc-server:GreetingService",
+        "//third_party/grpc:grpc-jar",
+       "//third_party:guava",
+       "//third_party:netty",
+    ],
+)
+
+
+java_binary(
+    name = "client",
+    srcs = ["src/main/java/com/example/grpc/client/MyGrpcClient.java"],
+    main_class = "com.example.grpc.client.MyGrpcClient",
     deps = [
         ":GreetingService_grpc",
         "//examples/simple-grpc-server:GreetingService",
